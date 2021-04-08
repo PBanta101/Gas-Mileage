@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\erau\\source\\repos\\GasMileage\\GasMileage\\GasMileage.csproj",
+      "projectUniqueName": "C:\\Users\\erau\\source\\repos\\GasMileage\\Code\\GasMileage\\GasMileage.csproj",
       "projectName": "GasMileage",
-      "projectPath": "C:\\Users\\erau\\source\\repos\\GasMileage\\GasMileage\\GasMileage.csproj",
+      "projectPath": "C:\\Users\\erau\\source\\repos\\GasMileage\\Code\\GasMileage\\GasMileage.csproj",
       "packagesPath": "C:\\Users\\erau\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\erau\\source\\repos\\GasMileage\\GasMileage\\obj\\",
+      "outputPath": "C:\\Users\\erau\\source\\repos\\GasMileage\\Code\\GasMileage\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\erau\\AppData\\Roaming\\NuGet\\NuGet.Config",
