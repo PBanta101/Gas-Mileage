@@ -1,11 +1,27 @@
 ﻿using GasMileage.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace GasMileage.Controllers
 {
    public class VehicleController
       : Controller
    {
+      //   F i e l d s   &   P r o p e r t i e s
+
+      private IVehicleRepository _repository;
+
+
+      //   C o n s t r u c t o r s
+
+      public VehicleController(IVehicleRepository repository)
+      {
+         _repository = repository;
+      }
+
+
+      //   M e t h o d s
+
       //   C r e a t e
 
       [HttpGet]
@@ -25,20 +41,16 @@ namespace GasMileage.Controllers
 
       //   R e a d
 
+      public IActionResult Index()
+      {
+         IQueryable<Vehicle> vehicles = _repository.GetAllVehicles();
+         return View(vehicles);
+      }
+
       // Read a Vehicle out of the Database and display it on a web page.
       public IActionResult Details(int id)
       {
-         // 1. Go to the database and retrieve Vehicle with the given id.
-         Vehicle v = new Vehicle();
-         v.Id = 1;
-         v.Year = 1985;
-         v.Make = "Toyota";
-         v.Model = "PickUp";
-         v.Vin = "JT4RN...";
-         v.Color = "White";
-         v.UserId = 2;
-
-         // 2. Display that Vehicle on a View.
+         Vehicle v = _repository.GetVehicleById(id);
          return View(v);
       }
 

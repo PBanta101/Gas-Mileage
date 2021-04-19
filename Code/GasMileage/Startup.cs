@@ -1,28 +1,41 @@
+using GasMileage.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GasMileage
 {
    public class Startup
    {
+      //   F i e l d s   &   P r o p e r t i e s
+
+      public IConfiguration Configuration { get; }
+
+
+      //   C o n s t r u c t o r s
+
       public Startup(IConfiguration configuration)
       {
          Configuration = configuration;
       }
 
-      public IConfiguration Configuration { get; }
+
+      //   M e t h o d s
 
       // This method gets called by the runtime. Use this method to add services to the container.
       public void ConfigureServices(IServiceCollection services)
       {
+         // IVehicleRepository    EfVehicleRepository    - Concept
+
+         services.AddDbContext<AppDbContext>
+            (options => options.UseSqlServer
+               (Configuration.GetConnectionString("DefaultConnection")));
+
+         services.AddScoped<IVehicleRepository, EfVehicleRepository>();
+
          services.AddControllersWithViews();
       }
 

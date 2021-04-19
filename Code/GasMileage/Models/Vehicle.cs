@@ -1,5 +1,8 @@
-﻿namespace GasMileage.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace GasMileage.Models
 {
+   [Table("Vehicle", Schema = "Mpg")]
    public class Vehicle // POCO
    {
       //   F i e l d s   &   P r o p e r t i e s

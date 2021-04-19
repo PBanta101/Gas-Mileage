@@ -1,0 +1,12 @@
+﻿@model IQueryable<Vehicle>
+
+<ul>
+   @foreach (Vehicle v in Model)
+   {
+      <li>
+         @v.Year
+         @v.Make
+         @v.Model
+      </li>
+   }
+</ul> 
