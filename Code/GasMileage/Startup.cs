@@ -31,8 +31,7 @@ namespace GasMileage
          // IVehicleRepository    EfVehicleRepository    - Concept
 
          services.AddDbContext<AppDbContext>
-            (options => options.UseSqlServer
-               (Configuration.GetConnectionString("DefaultConnection")));
+            (options => options.UseSqlServer(Configuration.GetConnectionString("AzureDatabase")));
 
          services.AddScoped<IVehicleRepository, EfVehicleRepository>();
 

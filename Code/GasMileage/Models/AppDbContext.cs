@@ -7,8 +7,6 @@ namespace GasMileage.Models
    {
       //   F i e l d s   &   P r o p e r t i e s
 
-      // public DbSet<User> Users { get; set; }
-
       public DbSet<Vehicle> Vehicles { get; set; }
 
 

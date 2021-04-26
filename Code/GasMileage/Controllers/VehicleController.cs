@@ -1,5 +1,6 @@
 ﻿using GasMileage.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 
 namespace GasMileage.Controllers
@@ -27,15 +28,29 @@ namespace GasMileage.Controllers
       [HttpGet]
       public IActionResult Add()
       {
-         return View();
+         return View(new Vehicle { Year = DateTime.Now.Year });
       }
 
       [HttpPost]
       public IActionResult Add(Vehicle v)
       {
-         // Adds this vehicle (v) to the database.
-         return RedirectToAction("Details");
-         // return View("Details");
+         if (v.Year < 1886)
+         {
+            ModelState.AddModelError("", "Year Must Be 1886 Or Later");
+         }
+
+         if (v.Year > DateTime.Now.Year + 1)
+         {
+            ModelState.AddModelError("", $"Year Must Be {DateTime.Now.Year + 1} Or Earlier");
+         }
+
+         if (ModelState.IsValid)
+         {
+            _repository.Create(v);
+            return RedirectToAction("Details", new { id = v.Id });
+         }
+
+         return View(v);
       }
 
 
@@ -43,14 +58,16 @@ namespace GasMileage.Controllers
 
       public IActionResult Index()
       {
-         IQueryable<Vehicle> vehicles = _repository.GetAllVehicles();
-         return View(vehicles);
+         return View(_repository.GetAllVehicles().OrderBy(v => v.Year));
       }
 
-      // Read a Vehicle out of the Database and display it on a web page.
       public IActionResult Details(int id)
       {
          Vehicle v = _repository.GetVehicleById(id);
+         if (v == null)
+         {
+            return RedirectToAction("Index");
+         }
          return View(v);
       }
 
@@ -60,28 +77,55 @@ namespace GasMileage.Controllers
       [HttpGet]
       public IActionResult Edit(int id)
       {
-         // 1. Read a Vehicle out of a Database.
-         Vehicle v = new Vehicle();
-         v.Id = 1;
-         v.Year = 1985;
-         v.Make = "Toyota";
-         v.Model = "PickUp";
-         v.Vin = "JT4RN...";
-         v.Color = "White";
-         v.UserId = 2;
-
-         // 2. Display it on a web page so that the user can change some fields / values.
+         Vehicle v = _repository.GetVehicleById(id);
+         if (v == null)
+         {
+            return RedirectToAction("Index", "Vehicle");
+         }
          return View(v);
       }
 
       [HttpPost]
       public IActionResult Edit(Vehicle v)
       {
-         // Update the vehicle (v) in the database - ignore for now
-         return RedirectToAction("Details");
+         if (v.Year < 1886)
+         {
+            ModelState.AddModelError("", "Year Must Be 1886 Or Later");
+         }
+
+         if (v.Year > DateTime.Now.Year + 1)
+         {
+            ModelState.AddModelError("", $"Year Must Be {DateTime.Now.Year + 1} Or Earlier");
+         }
+
+         if (ModelState.IsValid)
+         {
+            _repository.Update(v);
+            return RedirectToAction("Details", new { id = v.Id });
+         }
+
+         return View(v);
       }
 
 
       //   D e l e t e
+
+      [HttpGet]
+      public IActionResult Delete(int id)
+      {
+         Vehicle v = _repository.GetVehicleById(id);
+         if (v == null)
+         {
+            return RedirectToAction("Index");
+         }
+         return View(v);
+      }
+
+      [HttpPost]
+      public IActionResult Delete(Vehicle v)
+      {
+         _repository.Delete(v.Id);
+         return RedirectToAction("Index");
+      }
    }
 }

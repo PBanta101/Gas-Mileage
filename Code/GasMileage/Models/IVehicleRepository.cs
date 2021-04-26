@@ -6,6 +6,8 @@ namespace GasMileage.Models
    {
       //   C r e a t e
 
+      public Vehicle Create(Vehicle v);
+
 
       //   R e a d
 
@@ -16,8 +18,12 @@ namespace GasMileage.Models
 
       //   U p d a t e
 
+      public Vehicle Update(Vehicle v);
+
 
       //   D e l e t e
+
+      public bool Delete(int id);
 
    }
 }

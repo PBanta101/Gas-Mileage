@@ -1,12 +1,36 @@
 ﻿@model IQueryable<Vehicle>
 
-<ul>
-   @foreach (Vehicle v in Model)
-   {
-      <li>
-         @v.Year
-         @v.Make
-         @v.Model
-      </li>
-   }
-</ul> 
+<fieldset class="border d-inline-block p-3 shadow">
+   <legend> Vehicles </legend>
+
+   <table>
+      <thead>
+         <tr>
+            <td class="text-center">
+               <a asp-controller="Vehicle" asp-action="Add" class="btn btn-sm btn-success"> Add A Vehicle </a>
+            </td>
+         </tr>
+
+         <tr>
+            <td>
+               <hr />
+            </td>
+         </tr>
+      </thead>
+
+      <tbody>
+         @foreach (Vehicle v in Model)
+         {
+            <tr>
+               <td>
+                  <a asp-controller="Vehicle" asp-action="Details" asp-route-id="@v.Id">
+                     @v.Year
+                     @v.Make
+                     @v.Model
+                  </a>
+               </td>
+            </tr>
+         }
+      </tbody>
+   </table>
+</fieldset>
