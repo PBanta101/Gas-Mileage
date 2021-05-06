@@ -1,0 +1,46 @@
+﻿@model User
+
+<fieldset class="border d-inline-block p-3 shadow">
+   <legend> Login </legend>
+
+   <form method="post">
+      <table>
+         @if (ViewData.ModelState.ErrorCount > 0)
+         {
+            <thead>
+               <tr>
+                  <td colspan="2">
+                     <div asp-validation-summary="All" class="text-danger"> </div>
+                  </td>
+               </tr>
+
+               <tr> <td class="pl-2 pr-2" colspan="2"> <hr /> </td> </tr>
+            </thead>
+         }
+
+         <tbody>
+            <tr>
+               <th class="pr-1 text-right"> UserName: </th>
+               <td class="pl-1"> <input asp-for="UserName" type="email" class="rounded" placeholder="EMail Address" title="EMail Address" required /> </td>
+            </tr>
+
+            <tr>
+               <th class="pr-1 text-right"> Password: </th>
+               <td class="pl-1"> <input asp-for="Password" type="password" class="rounded" required /> </td>
+            </tr>
+         </tbody>
+
+         <tfoot>
+            <tr> <td class="pl-2 pr-2" colspan="2"> <hr /> </td> </tr>
+
+            <tr>
+               <td class="text-center" colspan="2">
+                  <input type="submit" class="btn btn-sm btn-outline-success mr-1" value="Login" />
+                  <a asp-controller="Home" asp-action="Index" class="btn btn-sm btn-outline-secondary ml-1"> Cancel </a>
+               </td>
+            </tr>
+         </tfoot>
+      </table>
+
+   </form>
+</fieldset>

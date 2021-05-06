@@ -1,6 +1,6 @@
 ﻿@model Vehicle
 
-<fieldset class="border d-inline-block p-3 shadow">
+<fieldset class="border d-inline-block mb-3 mr-4 p-3 pt-0 shadow align-top">
    <legend> Vehicle Details </legend>
 
    <table>
@@ -40,9 +40,9 @@
 
          <tr>
             <td class="text-center" colspan="2">
-               <a asp-controller="Vehicle" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-warning mr-1"> Edit </a>
-               <a asp-controller="Vehicle" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-danger ml-1 mr-1"> Delete </a>
-               <a asp-controller="Vehicle" asp-action="Index" class="btn btn-sm btn-info ml-1"> Back </a>
+               <a asp-controller="Vehicle" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-warning mr-1 text-dark"> Edit </a>
+               <a asp-controller="Vehicle" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-danger ml-1 mr-1"> Delete </a>
+               <a asp-controller="Vehicle" asp-action="Index" class="btn btn-sm btn-outline-primary ml-1"> Back </a>
             </td>
          </tr>
       </tfoot>
@@ -50,3 +50,50 @@
 </fieldset>
 
 
+
+<fieldset class="border d-inline-block p-3 shadow align-top">
+   <legend> Fillups </legend>
+
+   <table>
+      <thead>
+         <tr>
+            <td class="text-center" colspan="6">
+               <a asp-controller="Fillup" asp-action="Create" asp-route-vehicleId="@Model.Id"
+                  class="btn btn-sm btn-outline-success">
+                  Add A Fillup
+               </a>
+            </td>
+         </tr>
+
+         <tr> <td colspan="6"> <hr /> </td> </tr>
+
+         <tr>
+            <th class="pr-1 text-center"> Date          </th>
+            <th class="pr-1 text-center"> Gallons       </th>
+            <th class="pr-1 text-center"> Odometer      </th>
+            <th class="pr-1 text-center"> Total Cost    </th>
+            <th class="pr-1 text-center"> Trip Odometer </th>
+            <th class="pr-1 text-center"> MPG           </th>
+         </tr>
+      </thead>
+
+      <tbody>
+         @foreach (Fillup f in Model.Fillups)
+         {
+            <tr>
+               <td class="pr-1 text-center"> @f.Date.ToString("MM-dd-yyyy") </td>
+               <td class="pl-1 text-center"> @f.Gallons.ToString("N3")      </td>
+               <td class="pr-1 text-center"> @f.Odometer.ToString("N0")     </td>
+               <td class="pl-1 text-center"> @f.TotalCost.ToString("C")     </td>
+               <td class="pr-1 text-center"> @f.TripOdometer.ToString("N1") </td>
+
+               <td class="text-center">
+                  <a asp-controller="Fillup" asp-action="Details" asp-route-id="@f.Id" class="btn btn-sm btn-outline-primary">
+                     Details
+                  </a>
+               </td>
+            </tr>
+         }
+      </tbody>
+   </table>
+</fieldset>

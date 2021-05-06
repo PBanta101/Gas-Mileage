@@ -25,20 +25,29 @@ namespace GasMileage
 
       //   M e t h o d s
 
-      // This method gets called by the runtime. Use this method to add services to the container.
       public void ConfigureServices(IServiceCollection services)
       {
-         // IVehicleRepository    EfVehicleRepository    - Concept
-
          services.AddDbContext<AppDbContext>
-            (options => options.UseSqlServer(Configuration.GetConnectionString("AzureDatabase")));
+            (options => options.UseSqlServer(Configuration.GetConnectionString("LocalDb")));
 
+         services.AddScoped<IFillupRepository,  EfFillupRepository>();
+         services.AddScoped<IUserRepository,    EfUserRepository>();
          services.AddScoped<IVehicleRepository, EfVehicleRepository>();
 
          services.AddControllersWithViews();
+
+         services.AddHttpContextAccessor();
+
+         services.AddMemoryCache();
+         // services.AddDistributedMemoryCache();
+         services.AddSession(
+         //   options =>
+         //   {
+         //      options.IdleTimeout = TimeSpan.FromSeconds(10);
+         //   }
+         );
       }
 
-      // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
       public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
       {
          if (env.IsDevelopment())
@@ -48,13 +57,14 @@ namespace GasMileage
          else
          {
             app.UseExceptionHandler("/Home/Error");
-            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
          }
          app.UseHttpsRedirection();
          app.UseStaticFiles();
 
          app.UseRouting();
+
+         app.UseSession();
 
          app.UseAuthorization();
 

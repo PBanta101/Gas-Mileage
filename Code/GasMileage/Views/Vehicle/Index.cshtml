@@ -6,13 +6,13 @@
    <table>
       <thead>
          <tr>
-            <td class="text-center">
-               <a asp-controller="Vehicle" asp-action="Add" class="btn btn-sm btn-success"> Add A Vehicle </a>
+            <td class="text-center" colspan="2">
+               <a asp-controller="Vehicle" asp-action="Add" class="btn btn-sm btn-outline-success"> Add A Vehicle </a>
             </td>
          </tr>
 
          <tr>
-            <td>
+            <td colspan="2">
                <hr />
             </td>
          </tr>
@@ -23,10 +23,14 @@
          {
             <tr>
                <td>
-                  <a asp-controller="Vehicle" asp-action="Details" asp-route-id="@v.Id">
-                     @v.Year
-                     @v.Make
-                     @v.Model
+                  @v.Year
+                  @v.Make
+                  @v.Model
+               </td>
+
+               <td>
+                  <a asp-controller="Vehicle" asp-action="Details" asp-route-id="@v.Id" class="btn btn-sm btn-outline-primary">
+                     Details
                   </a>
                </td>
             </tr>

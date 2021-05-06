@@ -1,0 +1,56 @@
+﻿@model Fillup
+
+<fieldset class="border d-inline-block mb-3 mr-4 p-3 pt-0 shadow align-top">
+   <legend> Fillup Details </legend>
+
+   <table>
+      <tbody>
+         <tr>
+            <th class="pr-1 text-right"> Date: </th>
+            <td class="pl-1"> @Model.Date.ToString("MM-dd-yyyy") </td>
+         </tr>
+
+         <tr>
+            <th class="pr-1 text-right"> Gallons: </th>
+            <td class="pl-1"> @Model.Gallons.ToString("N3") </td>
+         </tr>
+
+         <tr>
+            <th class="pr-1 text-right"> Total Cost: </th>
+            <td class="pl-1"> @Model.TotalCost.ToString("C") </td>
+         </tr>
+
+         <tr>
+            <th class="pr-1 text-right"> Odometer: </th>
+            <td class="pl-1"> @Model.Odometer.ToString("N0") </td>
+         </tr>
+
+         <tr>
+            <th class="pr-1 text-right"> Trip Odometer: </th>
+            <td class="pl-1"> @Model.TripOdometer.ToString("N1") </td>
+         </tr>
+      </tbody>
+
+      <tfoot>
+         <tr>
+            <td colspan="2">
+               <hr />
+            </td>
+         </tr>
+
+         <tr>
+            <td class="text-center" colspan="2">
+               <a asp-controller="Fillup" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-warning mr-1 text-dark">
+                  Edit
+               </a>
+               <a asp-controller="Fillup" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-danger ml-1 mr-1">
+                  Delete
+               </a>
+               <a asp-controller="Vehicle" asp-action="Details" asp-route-id="@Model.VehicleId" class="btn btn-sm btn-outline-primary ml-1">
+                  Back
+               </a>
+            </td>
+         </tr>
+      </tfoot>
+   </table>
+</fieldset>
