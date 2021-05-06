@@ -8,13 +8,15 @@ namespace GasMileage.Controllers
    {
       //   F i e l d s   &   P r o p e r t i e s
 
-      private IUserRepository _repository;
+      private readonly IEmailRepository _emailRepository;
+      private readonly IUserRepository _repository;
 
 
       //   C o n s t r u c t o r s
 
-      public UserController(IUserRepository repository)
+      public UserController(IUserRepository repository, IEmailRepository emailRepository)
       {
+         _emailRepository = emailRepository;
          _repository = repository;
       }
 
@@ -26,16 +28,21 @@ namespace GasMileage.Controllers
       [HttpGet]
       public IActionResult Register()
       {
-         return View(new User { Password = _repository.RandomPassword() });
+         return View(new User { Password = "tihSbmuD" });
       }
 
       [HttpPost]
       public IActionResult Register(User u)
       {
+         u.Password = _repository.RandomPassword();
          User newUser = _repository.Create(u);
          if (newUser != null)
-            return RedirectToAction("Index", "Home");
+         {
+            _emailRepository.Send(u.UserName, "Account Created", $"Password: {u.Password}");
+            return View("RegisterSuccess", u);
+         }
 
+         u.Password = "tihSbmuD";
          ModelState.AddModelError("", "Unable To Register New User");
          return View(u);
       }
@@ -95,27 +102,20 @@ namespace GasMileage.Controllers
       [HttpGet]
       public IActionResult ResetPassword()
       {
-         return View(new User { Password = _repository.RandomPassword() });
+         return View(new User { Password = "tihSbmuD" });
       }
 
       [HttpPost]
       public IActionResult ResetPassword(User u)
       {
-         if (ModelState.IsValid)
+         u.TempPassword = _repository.RandomPassword();
+         if (_repository.ResetPassword(u))
          {
-            u.TempPassword = u.Password;
-            u.Password = null;
-            if (_repository.ResetPassword(u))
-            {
-               return RedirectToAction("Index", "Home");
-            }
-
-            u.Password = u.TempPassword;
-            u.TempPassword = null;
-
-            ModelState.AddModelError("", "Unable To Reset Password");
+            _emailRepository.Send(u.UserName, "Password Reset", $"Password: {u.TempPassword}");
+            return View("ResetPasswordSuccess", u);
          }
 
+         ModelState.AddModelError("", "Unable To Reset Password");
          return View(u);
       }
 

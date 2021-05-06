@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GasMileage.Migrations
 {
-    public partial class One : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,9 +17,9 @@ namespace GasMileage.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TempPassword = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(128)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(128)", nullable: false),
+                    TempPassword = table.Column<string>(type: "nvarchar(128)", nullable: true),
                     IsAdmin = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
@@ -75,27 +75,9 @@ namespace GasMileage.Migrations
 
             migrationBuilder.InsertData(
                 schema: "Mpg",
-                table: "Vehicle",
-                columns: new[] { "Id", "Color", "Make", "Model", "UserId", "Vin", "Year" },
-                values: new object[] { 1, "White", "Toyota", "Pickup", 1, "JT4RN...", 1985 });
-
-            migrationBuilder.InsertData(
-                schema: "Mpg",
-                table: "Vehicle",
-                columns: new[] { "Id", "Color", "Make", "Model", "UserId", "Vin", "Year" },
-                values: new object[] { 2, "Gold", "Saturn", "SW2", 0, null, 1995 });
-
-            migrationBuilder.InsertData(
-                schema: "Mpg",
-                table: "Fillup",
-                columns: new[] { "Id", "Date", "DaysSinceLastFillup", "Gallons", "Odometer", "TotalCost", "TripOdometer", "VehicleId" },
-                values: new object[] { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 10.234m, 12345, 25.52m, 275.6m, 1 });
-
-            migrationBuilder.InsertData(
-                schema: "Mpg",
-                table: "Fillup",
-                columns: new[] { "Id", "Date", "DaysSinceLastFillup", "Gallons", "Odometer", "TotalCost", "TripOdometer", "VehicleId" },
-                values: new object[] { 2, new DateTime(2021, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 10.234m, 12700, 25.52m, 275.6m, 1 });
+                table: "User",
+                columns: new[] { "Id", "IsAdmin", "Password", "TempPassword", "UserName" },
+                values: new object[] { 1, true, "F1E11932AD24C091A7F52C56296AE5137DF23BCE6E81306D6BE9343CB1C81F68DC967B80490A4E1178273B4A460A6559BF7ACFEFBCD2A292D599869DB28E89CD", null, "85FDFD0FB6DFE3AFED031983A1EAEC69ADB8E91CFCEB9FA3EBFAA6984C1E564541CCA57A965FD4C6ACF6632EB0130F42F70E4E52EA038B111B6E16461F2165CD" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Fillup_VehicleId",

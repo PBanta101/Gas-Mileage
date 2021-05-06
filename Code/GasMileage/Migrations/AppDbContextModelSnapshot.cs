@@ -52,30 +52,6 @@ namespace GasMileage.Migrations
                     b.HasIndex("VehicleId");
 
                     b.ToTable("Fillup", "Mpg");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaysSinceLastFillup = 0,
-                            Gallons = 10.234m,
-                            Odometer = 12345,
-                            TotalCost = 25.52m,
-                            TripOdometer = 275.6m,
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Date = new DateTime(2021, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DaysSinceLastFillup = 0,
-                            Gallons = 10.234m,
-                            Odometer = 12700,
-                            TotalCost = 25.52m,
-                            TripOdometer = 275.6m,
-                            VehicleId = 1
-                        });
                 });
 
             modelBuilder.Entity("GasMileage.Models.User", b =>
@@ -90,14 +66,14 @@ namespace GasMileage.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("TempPassword")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)");
 
                     b.HasKey("Id");
 
@@ -105,6 +81,15 @@ namespace GasMileage.Migrations
                         .IsUnique();
 
                     b.ToTable("User", "Mpg");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsAdmin = true,
+                            Password = "F1E11932AD24C091A7F52C56296AE5137DF23BCE6E81306D6BE9343CB1C81F68DC967B80490A4E1178273B4A460A6559BF7ACFEFBCD2A292D599869DB28E89CD",
+                            UserName = "85FDFD0FB6DFE3AFED031983A1EAEC69ADB8E91CFCEB9FA3EBFAA6984C1E564541CCA57A965FD4C6ACF6632EB0130F42F70E4E52EA038B111B6E16461F2165CD"
+                        });
                 });
 
             modelBuilder.Entity("GasMileage.Models.Vehicle", b =>
@@ -137,27 +122,6 @@ namespace GasMileage.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Vehicle", "Mpg");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Color = "White",
-                            Make = "Toyota",
-                            Model = "Pickup",
-                            UserId = 1,
-                            Vin = "JT4RN...",
-                            Year = 1985
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Color = "Gold",
-                            Make = "Saturn",
-                            Model = "SW2",
-                            UserId = 0,
-                            Year = 1995
-                        });
                 });
 
             modelBuilder.Entity("GasMileage.Models.Fillup", b =>

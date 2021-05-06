@@ -30,9 +30,10 @@ namespace GasMileage
          services.AddDbContext<AppDbContext>
             (options => options.UseSqlServer(Configuration.GetConnectionString("LocalDb")));
 
-         services.AddScoped<IFillupRepository,  EfFillupRepository>();
-         services.AddScoped<IUserRepository,    EfUserRepository>();
-         services.AddScoped<IVehicleRepository, EfVehicleRepository>();
+         services.AddScoped<IEmailRepository,   GmailEmailRepository>();
+         services.AddScoped<IFillupRepository,  EfFillupRepository  >();
+         services.AddScoped<IUserRepository,    EfUserRepository    >();
+         services.AddScoped<IVehicleRepository, EfVehicleRepository >();
 
          services.AddControllersWithViews();
 

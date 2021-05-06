@@ -9,8 +9,8 @@ namespace GasMileage.Models
    {
       //   F i e l d s   &   P r o p e r t i e s
 
-      private AppDbContext    _context;
-      private IUserRepository _userRepository;
+      private readonly AppDbContext    _context;
+      private readonly IUserRepository _userRepository;
 
 
       //   C o n s t r u c t o r s
@@ -36,9 +36,8 @@ namespace GasMileage.Models
                _context.Vehicles.Add(v);
                _context.SaveChanges();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-               // return null; // Maybe
             }
             return v;
          }
@@ -94,9 +93,8 @@ namespace GasMileage.Models
             {
                _context.SaveChanges();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-               // return null; // Maybe
             }
          }
          return vehicleToUpdate;
@@ -119,7 +117,7 @@ namespace GasMileage.Models
             _context.SaveChanges();
             return true;
          }
-         catch (Exception e)
+         catch (Exception)
          {
          }
 
