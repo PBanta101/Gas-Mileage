@@ -29,14 +29,47 @@
             <th class="pr-1 text-right"> Trip Odometer: </th>
             <td class="pl-1"> @Model.TripOdometer.ToString("N1") </td>
          </tr>
+
+         <tr> <td colspan="2"> <hr /> </td> </tr>
+
+         <tr>
+            <th class="pr-1 text-right"> Days Since Last Fillup: </th>
+            <td class="pl-1"> @Model.DaysSinceLastFillup.ToString("N0") </td>
+         </tr>
+
+         <tr>
+            <th class="pr-1 text-right"> Gallons Per Day: </th>
+            <td class="pl-1"> @Model.GallonsPerDay.ToString("N2") </td>
+         </tr>
+
+         <tr>
+            <th class="pr-1 text-right"> Miles Per Day: </th>
+            <td class="pl-1"> @Model.MilesPerDay.ToString("N1") </td>
+         </tr>
+
+         <tr>
+            <th class="pr-1 text-right"> Miles Per Gallon: </th>
+            <td class="pl-1"> @Model.MilesPerGallon.ToString("N1") </td>
+         </tr>
+
+         <tr>
+            <th class="pr-1 text-right"> Price Per Day: </th>
+            <td class="pl-1"> @Model.PricePerDay.ToString("C") </td>
+         </tr>
+
+         <tr>
+            <th class="pr-1 text-right"> Price Per Gallon: </th>
+            <td class="pl-1"> @Model.PricePerGallon.ToString("C3") </td>
+         </tr>
+
+         <tr>
+            <th class="pr-1 text-right"> Price Per Mile: </th>
+            <td class="pl-1"> @Model.PricePerMile.ToString("C3") </td>
+         </tr>
       </tbody>
 
       <tfoot>
-         <tr>
-            <td colspan="2">
-               <hr />
-            </td>
-         </tr>
+         <tr> <td colspan="2"> <hr /> </td> </tr>
 
          <tr>
             <td class="text-center" colspan="2">

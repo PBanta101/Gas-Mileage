@@ -15,6 +15,8 @@ namespace GasMileage.Models
 
       public Vehicle GetVehicleById(int id);
 
+      public bool VehicleExists(int id);
+
 
       //   U p d a t e
 

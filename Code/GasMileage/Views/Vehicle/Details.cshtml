@@ -57,7 +57,7 @@
    <table>
       <thead>
          <tr>
-            <td class="text-center" colspan="6">
+            <td class="text-center" colspan="7">
                <a asp-controller="Fillup" asp-action="Create" asp-route-vehicleId="@Model.Id"
                   class="btn btn-sm btn-outline-success">
                   Add A Fillup
@@ -65,7 +65,7 @@
             </td>
          </tr>
 
-         <tr> <td colspan="6"> <hr /> </td> </tr>
+         <tr> <td colspan="7"> <hr /> </td> </tr>
 
          <tr>
             <th class="pr-1 text-center"> Date          </th>
@@ -82,12 +82,13 @@
          {
             <tr>
                <td class="pr-1 text-center"> @f.Date.ToString("MM-dd-yyyy") </td>
-               <td class="pl-1 text-center"> @f.Gallons.ToString("N3")      </td>
-               <td class="pr-1 text-center"> @f.Odometer.ToString("N0")     </td>
-               <td class="pl-1 text-center"> @f.TotalCost.ToString("C")     </td>
-               <td class="pr-1 text-center"> @f.TripOdometer.ToString("N1") </td>
+               <td class="pl-1 pr-1 text-center"> @f.Gallons.ToString("N3") </td>
+               <td class="pl-1 pr-1 text-center"> @f.Odometer.ToString("N0") </td>
+               <td class="pl-1 pr-1 text-center"> @f.TotalCost.ToString("C") </td>
+               <td class="pl-1 pr-1 text-center"> @f.TripOdometer.ToString("N1") </td>
+               <td class="pl-1 pr-1 text-center"> @f.MilesPerGallon.ToString("N1") </td>
 
-               <td class="text-center">
+               <td class="pl-1 text-center">
                   <a asp-controller="Fillup" asp-action="Details" asp-route-id="@f.Id" class="btn btn-sm btn-outline-primary">
                      Details
                   </a>

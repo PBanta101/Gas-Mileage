@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GasMileage.Models
@@ -8,14 +10,16 @@ namespace GasMileage.Models
    {
       //   F i e l d s   &   P r o p e r t i e s
 
-      private AppDbContext _context;
+      private AppDbContext       _context;
+      private IVehicleRepository _vehicleRepository;
 
 
       //   C o n s t r u c t o r s
 
-      public EfFillupRepository(AppDbContext context)
+      public EfFillupRepository(AppDbContext context, IVehicleRepository vehicleRepository)
       {
-         _context = context;
+         _context           = context;
+         _vehicleRepository = vehicleRepository;
       }
 
 
@@ -27,6 +31,7 @@ namespace GasMileage.Models
       {
          _context.Fillups.Add(f);
          _context.SaveChanges();
+         RecomputeDaysBetweenFillups(f.VehicleId);
          return f;
       }
 
@@ -59,6 +64,7 @@ namespace GasMileage.Models
             fillupToUpdate.TotalCost    = f.TotalCost;
             fillupToUpdate.TripOdometer = f.TripOdometer;
             _context.SaveChanges();
+            RecomputeDaysBetweenFillups(f.VehicleId);
          }
          return fillupToUpdate;
       }
@@ -77,5 +83,33 @@ namespace GasMileage.Models
          _context.SaveChanges();
          return true;
       }
+
+
+      //   P r i v a t e   M e t h o d s
+
+      private void RecomputeDaysBetweenFillups(int vehicleId)
+      {
+         if (_vehicleRepository.VehicleExists(vehicleId) == false)
+         {
+            return;
+         }
+
+         IEnumerable<Fillup> fillups = _context.Fillups.Where(f => f.VehicleId == vehicleId)
+                                                       .OrderBy(f => f.Date)
+                                                       .ThenBy(f => f.Odometer);
+         if (fillups == null || fillups.Count() == 0)
+         {
+            return;
+         }
+
+         DateTime? lastDate = fillups.ElementAt(0).Date;
+         foreach (Fillup f in fillups)
+         {
+            f.DaysSinceLastFillup = Math.Max(1, (int)((f.Date - lastDate).GetValueOrDefault().TotalDays + 0.5));
+            lastDate = f.Date;
+         }
+
+         _context.SaveChanges();
+      } // end RecomputeDaysBetweenFillups( )
    }
 }

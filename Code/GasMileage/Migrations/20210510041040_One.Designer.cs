@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GasMileage.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210506035406_Initial")]
-    partial class Initial
+    [Migration("20210510041040_One")]
+    partial class One
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,22 +29,54 @@ namespace GasMileage.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<int>("DaysSinceLastFillup")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
 
                     b.Property<decimal>("Gallons")
                         .HasColumnType("decimal(7,3)");
 
+                    b.Property<decimal>("GallonsPerDay")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("decimal(6,2)")
+                        .HasComputedColumnSql("iif( [DaysSinceLastFillup] > 1, [Gallons] / [DaysSinceLastFillup], [Gallons] )");
+
+                    b.Property<decimal>("MilesPerDay")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("decimal(5,1)")
+                        .HasComputedColumnSql("iif( [DaysSinceLastFillup] > 1, [TripOdometer] / [DaysSinceLastFillup], [TripOdometer] )");
+
+                    b.Property<decimal>("MilesPerGallon")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("decimal(5,2)")
+                        .HasComputedColumnSql("iif( [Gallons] > 0, [TripOdometer] / [Gallons], 999.9 )");
+
                     b.Property<int>("Odometer")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("PricePerDay")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("decimal(6,2)")
+                        .HasComputedColumnSql("iif( [DaysSinceLastFillup] > 1, [TotalCost] / [DaysSinceLastFillup], [TotalCost] )");
+
+                    b.Property<decimal>("PricePerGallon")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("decimal(5,3)")
+                        .HasComputedColumnSql("iif( [Gallons] > 0, [TotalCost] / [Gallons], 999.9 )");
+
+                    b.Property<decimal>("PricePerMile")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("decimal(4,2)")
+                        .HasComputedColumnSql("iif( [TripOdometer] > 0, [TotalCost] / [TripOdometer], 999.9 )");
 
                     b.Property<decimal>("TotalCost")
                         .HasColumnType("decimal(7,2)");
 
                     b.Property<decimal>("TripOdometer")
-                        .HasColumnType("decimal(7,1)");
+                        .HasColumnType("decimal(6,1)");
 
                     b.Property<int>("VehicleId")
                         .HasColumnType("int");

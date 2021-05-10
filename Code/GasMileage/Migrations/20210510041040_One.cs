@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GasMileage.Migrations
 {
-    public partial class Initial : Migration
+    public partial class One : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,12 +53,18 @@ namespace GasMileage.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
                     Gallons = table.Column<decimal>(type: "decimal(7,3)", nullable: false),
                     Odometer = table.Column<int>(type: "int", nullable: false),
                     TotalCost = table.Column<decimal>(type: "decimal(7,2)", nullable: false),
-                    TripOdometer = table.Column<decimal>(type: "decimal(7,1)", nullable: false),
-                    DaysSinceLastFillup = table.Column<int>(type: "int", nullable: false),
+                    TripOdometer = table.Column<decimal>(type: "decimal(6,1)", nullable: false),
+                    DaysSinceLastFillup = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
+                    GallonsPerDay = table.Column<decimal>(type: "decimal(6,2)", nullable: false, computedColumnSql: "iif( [DaysSinceLastFillup] > 1, [Gallons] / [DaysSinceLastFillup], [Gallons] )"),
+                    MilesPerDay = table.Column<decimal>(type: "decimal(5,1)", nullable: false, computedColumnSql: "iif( [DaysSinceLastFillup] > 1, [TripOdometer] / [DaysSinceLastFillup], [TripOdometer] )"),
+                    MilesPerGallon = table.Column<decimal>(type: "decimal(5,2)", nullable: false, computedColumnSql: "iif( [Gallons] > 0, [TripOdometer] / [Gallons], 999.9 )"),
+                    PricePerDay = table.Column<decimal>(type: "decimal(6,2)", nullable: false, computedColumnSql: "iif( [DaysSinceLastFillup] > 1, [TotalCost] / [DaysSinceLastFillup], [TotalCost] )"),
+                    PricePerGallon = table.Column<decimal>(type: "decimal(5,3)", nullable: false, computedColumnSql: "iif( [Gallons] > 0, [TotalCost] / [Gallons], 999.9 )"),
+                    PricePerMile = table.Column<decimal>(type: "decimal(4,2)", nullable: false, computedColumnSql: "iif( [TripOdometer] > 0, [TotalCost] / [TripOdometer], 999.9 )"),
                     VehicleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

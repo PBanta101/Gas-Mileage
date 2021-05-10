@@ -6,6 +6,9 @@ namespace GasMileage.Models
    [Table("User", Schema = "Mpg")]
    public class User
    {
+      // [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+      // [Key]
+      // public Guid Id { get; set; }
       public int    Id           { get; set; }
 
       [Column(TypeName = "nvarchar(128)")]

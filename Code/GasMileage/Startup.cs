@@ -27,13 +27,17 @@ namespace GasMileage
 
       public void ConfigureServices(IServiceCollection services)
       {
-         services.AddDbContext<AppDbContext>
-            (options => options.UseSqlServer(Configuration.GetConnectionString("LocalDb")));
+         string dbConnectionString = System.Environment.GetEnvironmentVariable("MssaCadGasMileageDbConnectionString");
 
-         services.AddScoped<IEmailRepository,   GmailEmailRepository>();
-         services.AddScoped<IFillupRepository,  EfFillupRepository  >();
-         services.AddScoped<IUserRepository,    EfUserRepository    >();
-         services.AddScoped<IVehicleRepository, EfVehicleRepository >();
+         // services.AddDbContext<AppDbContext>
+         //    (options => options.UseSqlServer(Configuration.GetConnectionString("LocalDb")));
+
+         services.AddDbContext<AppDbContext>(options => options.UseSqlServer(dbConnectionString));
+
+         services.AddScoped<IEmailRepository, GmailEmailRepository>();
+         services.AddScoped<IFillupRepository, EfFillupRepository>();
+         services.AddScoped<IUserRepository, EfUserRepository>();
+         services.AddScoped<IVehicleRepository, EfVehicleRepository>();
 
          services.AddControllersWithViews();
 

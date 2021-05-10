@@ -76,6 +76,14 @@ namespace GasMileage.Models
          return null;
       }
 
+      public bool VehicleExists(int vehicleId)
+      {
+         if (_userRepository == null || _userRepository.IsUserLoggedIn() == false)
+            return false;
+
+         return _context.Vehicles.Any(v => v.Id == vehicleId && v.UserId == _userRepository.GetLoggedInUserId());
+      }
+
 
       //   U p d a t e
 

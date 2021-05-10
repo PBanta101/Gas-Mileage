@@ -46,7 +46,33 @@ namespace GasMileage.Models
 
 
          //   F i l l u p s
+         modelBuilder.Entity<Fillup>()
+            .Property(f => f.DaysSinceLastFillup)
+            .HasDefaultValue(1);
 
+         modelBuilder.Entity<Fillup>()
+            .Property(f => f.GallonsPerDay)
+            .HasComputedColumnSql("iif( [DaysSinceLastFillup] > 1, [Gallons] / [DaysSinceLastFillup], [Gallons] )");
+
+         modelBuilder.Entity<Fillup>()
+            .Property(f => f.MilesPerDay)
+            .HasComputedColumnSql("iif( [DaysSinceLastFillup] > 1, [TripOdometer] / [DaysSinceLastFillup], [TripOdometer] )");
+
+         modelBuilder.Entity<Fillup>()
+            .Property(f => f.MilesPerGallon)
+            .HasComputedColumnSql("iif( [Gallons] > 0, [TripOdometer] / [Gallons], 999.9 )");
+
+         modelBuilder.Entity<Fillup>()
+            .Property(f => f.PricePerDay)
+            .HasComputedColumnSql("iif( [DaysSinceLastFillup] > 1, [TotalCost] / [DaysSinceLastFillup], [TotalCost] )");
+
+         modelBuilder.Entity<Fillup>()
+            .Property(f => f.PricePerGallon)
+            .HasComputedColumnSql("iif( [Gallons] > 0, [TotalCost] / [Gallons], 999.9 )");
+
+         modelBuilder.Entity<Fillup>()
+            .Property(f => f.PricePerMile)
+            .HasComputedColumnSql("iif( [TripOdometer] > 0, [TotalCost] / [TripOdometer], 999.9 )");
       } // end OnModelCreating( )
    } // end class
 } // end namespace
