@@ -59,7 +59,7 @@ namespace GasMileage.Models
          return noVehicles.AsQueryable<Vehicle>();
       }
 
-      public Vehicle GetVehicleById(int id)
+      public Vehicle GetVehicleById(Guid id)
       {
          if (_userRepository.IsUserLoggedIn())
          {
@@ -76,9 +76,9 @@ namespace GasMileage.Models
          return null;
       }
 
-      public bool VehicleExists(int vehicleId)
+      public bool VehicleExists(Guid vehicleId)
       {
-         if (_userRepository == null || _userRepository.IsUserLoggedIn() == false)
+         if (_userRepository.IsUserLoggedIn() == false)
             return false;
 
          return _context.Vehicles.Any(v => v.Id == vehicleId && v.UserId == _userRepository.GetLoggedInUserId());
@@ -111,7 +111,7 @@ namespace GasMileage.Models
 
       //   D e l e t e
 
-      public bool Delete(int id)
+      public bool Delete(Guid id)
       {
          Vehicle vehicleToDelete = GetVehicleById(id);
          if (vehicleToDelete == null)

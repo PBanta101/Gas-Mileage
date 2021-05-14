@@ -21,10 +21,9 @@ namespace GasMileage.Migrations
 
             modelBuilder.Entity("GasMileage.Models.Fillup", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("date");
@@ -76,7 +75,10 @@ namespace GasMileage.Migrations
                     b.Property<decimal>("TripOdometer")
                         .HasColumnType("decimal(6,1)");
 
-                    b.Property<int>("VehicleId")
+                    b.Property<Guid>("VehicleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("ZipCode")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -84,14 +86,320 @@ namespace GasMileage.Migrations
                     b.HasIndex("VehicleId");
 
                     b.ToTable("Fillup", "Mpg");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c61c29ad-9be1-4eb3-a9b2-08d91576fae3"),
+                            Date = new DateTime(2020, 12, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 1,
+                            Gallons = 11.104m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 147360,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 21.64m,
+                            TripOdometer = 225.7m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            ZipCode = 80132
+                        },
+                        new
+                        {
+                            Id = new Guid("3e6b136b-a2b5-4ed9-a9b1-08d91576fae3"),
+                            Date = new DateTime(2020, 12, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 5,
+                            Gallons = 5.881m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 147512,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 11.87m,
+                            TripOdometer = 151.6m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            ZipCode = 80132
+                        },
+                        new
+                        {
+                            Id = new Guid("25a96d7a-ea59-47c5-a9b0-08d91576fae3"),
+                            Date = new DateTime(2020, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 8,
+                            Gallons = 5.549m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 147653,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 11.2m,
+                            TripOdometer = 141m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            ZipCode = 80132
+                        },
+                        new
+                        {
+                            Id = new Guid("bc2a0ff1-e36f-4ce2-a9af-08d91576fae3"),
+                            Date = new DateTime(2021, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 5,
+                            Gallons = 5.134m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 147782,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 10.37m,
+                            TripOdometer = 129m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            ZipCode = 80132
+                        },
+                        new
+                        {
+                            Id = new Guid("ff53ce12-e9c3-48bd-a9ae-08d91576fae3"),
+                            Date = new DateTime(2021, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 3,
+                            Gallons = 5.324m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 147917,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 10.91m,
+                            TripOdometer = 135.1m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            ZipCode = 80132
+                        },
+                        new
+                        {
+                            Id = new Guid("45f6d3a5-dd36-46bb-a9ad-08d91576fae3"),
+                            Date = new DateTime(2021, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 25,
+                            Gallons = 7.408m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 148105,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 16.29m,
+                            TripOdometer = 187.9m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            ZipCode = 80132
+                        },
+                        new
+                        {
+                            Id = new Guid("98f47b0a-02cb-4190-a9ac-08d91576fae3"),
+                            Date = new DateTime(2021, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 38,
+                            Gallons = 7.078m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 148263,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 19.53m,
+                            TripOdometer = 157.8m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            ZipCode = 80132
+                        },
+                        new
+                        {
+                            Id = new Guid("89c21c3d-acb0-4d57-a9ab-08d91576fae3"),
+                            Date = new DateTime(2021, 3, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 7,
+                            Gallons = 5.739m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 148418,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 16.06m,
+                            TripOdometer = 155.2m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            ZipCode = 80132
+                        },
+                        new
+                        {
+                            Id = new Guid("5e9a7626-db13-44f7-a9aa-08d91576fae3"),
+                            Date = new DateTime(2021, 4, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 23,
+                            Gallons = 8.099m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 148612,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 22.99m,
+                            TripOdometer = 193.7m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            ZipCode = 80132
+                        },
+                        new
+                        {
+                            Id = new Guid("a745ed52-28c9-4951-a9a9-08d91576fae3"),
+                            Date = new DateTime(2021, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 14,
+                            Gallons = 10.438m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 148884,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 29.53m,
+                            TripOdometer = 271.3m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            ZipCode = 80132
+                        },
+                        new
+                        {
+                            Id = new Guid("510a1007-96e4-4069-a9a8-08d91576fae3"),
+                            Date = new DateTime(2021, 4, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 5,
+                            Gallons = 4.677m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 149003,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 13.23m,
+                            TripOdometer = 119.8m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            ZipCode = 80132
+                        },
+                        new
+                        {
+                            Id = new Guid("87354378-e1a9-472f-a9a7-08d91576fae3"),
+                            Date = new DateTime(2021, 4, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 1,
+                            Gallons = 10.138m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 149278,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 25.33m,
+                            TripOdometer = 274.8m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            ZipCode = 69153
+                        },
+                        new
+                        {
+                            Id = new Guid("3ba9f92b-9c0a-4ab2-a9a6-08d91576fae3"),
+                            Date = new DateTime(2021, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 1,
+                            Gallons = 12.317m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 149587,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 34.23m,
+                            TripOdometer = 308.2m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            ZipCode = 68502
+                        },
+                        new
+                        {
+                            Id = new Guid("b5949bba-d0d7-4183-a9a5-08d91576fae3"),
+                            Date = new DateTime(2021, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 1,
+                            Gallons = 12.192m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 149846,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 33.88m,
+                            TripOdometer = 259m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            ZipCode = 69101
+                        },
+                        new
+                        {
+                            Id = new Guid("44fd61fc-df99-4eee-a9a4-08d91576fae3"),
+                            Date = new DateTime(2021, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 2,
+                            Gallons = 12.652m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 150179,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 36.17m,
+                            TripOdometer = 333.7m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            ZipCode = 80132
+                        },
+                        new
+                        {
+                            Id = new Guid("bd3eb530-2d7e-40e3-a9a3-08d91576fae3"),
+                            Date = new DateTime(2021, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 3,
+                            Gallons = 8.672m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 150424,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 27.31m,
+                            TripOdometer = 244.9m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a")
+                        },
+                        new
+                        {
+                            Id = new Guid("c58885ee-02d6-4bad-34db-08d91576652f"),
+                            Date = new DateTime(2021, 5, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DaysSinceLastFillup = 2,
+                            Gallons = 7.703m,
+                            GallonsPerDay = 0m,
+                            MilesPerDay = 0m,
+                            MilesPerGallon = 0m,
+                            Odometer = 150624,
+                            PricePerDay = 0m,
+                            PricePerGallon = 0m,
+                            PricePerMile = 0m,
+                            TotalCost = 27.31m,
+                            TripOdometer = 199.8m,
+                            VehicleId = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            ZipCode = 80132
+                        });
                 });
 
             modelBuilder.Entity("GasMileage.Models.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool?>("IsAdmin")
                         .HasColumnType("bit");
@@ -117,7 +425,7 @@ namespace GasMileage.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = new Guid("469faf7d-507d-456a-5d5c-08d9140bf7c6"),
                             IsAdmin = true,
                             Password = "F1E11932AD24C091A7F52C56296AE5137DF23BCE6E81306D6BE9343CB1C81F68DC967B80490A4E1178273B4A460A6559BF7ACFEFBCD2A292D599869DB28E89CD",
                             UserName = "85FDFD0FB6DFE3AFED031983A1EAEC69ADB8E91CFCEB9FA3EBFAA6984C1E564541CCA57A965FD4C6ACF6632EB0130F42F70E4E52EA038B111B6E16461F2165CD"
@@ -126,27 +434,30 @@ namespace GasMileage.Migrations
 
             modelBuilder.Entity("GasMileage.Models.Vehicle", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Make")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Vin")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
@@ -154,6 +465,17 @@ namespace GasMileage.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Vehicle", "Mpg");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("0def444a-db95-47ec-fa5b-08d91575881a"),
+                            Color = "Red",
+                            Make = "Subaru",
+                            Model = "Forester",
+                            UserId = new Guid("469faf7d-507d-456a-5d5c-08d9140bf7c6"),
+                            Year = 2002
+                        });
                 });
 
             modelBuilder.Entity("GasMileage.Models.Fillup", b =>

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace GasMileage.Models
 {
@@ -11,9 +12,9 @@ namespace GasMileage.Models
 
       //   R e a d
 
-      public IQueryable<Fillup> GetAllFillups(int vehicleId);
+      public IQueryable<Fillup> GetAllFillups(Guid vehicleId);
 
-      public Fillup GetFillupById(int fillupId);
+      public Fillup GetFillupById(Guid fillupId);
 
 
       //   U p d a t e

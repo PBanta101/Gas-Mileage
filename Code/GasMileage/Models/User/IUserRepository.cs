@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System;
 
 namespace GasMileage.Models
 {
@@ -6,18 +6,14 @@ namespace GasMileage.Models
    {
       //   C r e a t e
 
-      public User Create(User user);
+      public bool Create(User user);
 
 
       //   R e a d
 
-      public int GetLoggedInUserId();
+      public Guid GetLoggedInUserId();
 
       public string GetLoggedInUserName();
-
-      //public User GetUserByEmailAddress(string emailAddress);
-
-      //public User GetUserById(int id);
 
       public bool IsUserLoggedIn();
 
@@ -25,14 +21,14 @@ namespace GasMileage.Models
 
       public void Logout();
 
+      public bool UserExists(string emailAddress);
+
 
       //   U p d a t e
 
       public bool ChangePassword(string oldPassword, string newPassword);
 
       public bool ResetPassword(User user);
-
-      //public User Update(User u);
 
 
       //   D e l e t e

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace GasMileage.Models
 {
@@ -13,9 +14,9 @@ namespace GasMileage.Models
 
       public IQueryable<Vehicle> GetAllVehicles();
 
-      public Vehicle GetVehicleById(int id);
+      public Vehicle GetVehicleById(Guid id);
 
-      public bool VehicleExists(int id);
+      public bool VehicleExists(Guid id);
 
 
       //   U p d a t e
@@ -25,7 +26,7 @@ namespace GasMileage.Models
 
       //   D e l e t e
 
-      public bool Delete(int id);
+      public bool Delete(Guid id);
 
    }
 }

@@ -10,15 +10,17 @@ namespace GasMileage.Models
    {
       //   F i e l d s   &   P r o p e r t i e s
 
-      private AppDbContext       _context;
-      private IVehicleRepository _vehicleRepository;
+      private readonly AppDbContext       _context;
+      private readonly IUserRepository    _userRepository;
+      private readonly IVehicleRepository _vehicleRepository;
 
 
       //   C o n s t r u c t o r s
 
-      public EfFillupRepository(AppDbContext context, IVehicleRepository vehicleRepository)
+      public EfFillupRepository(AppDbContext context, IUserRepository userRepository, IVehicleRepository vehicleRepository)
       {
          _context           = context;
+         _userRepository    = userRepository;
          _vehicleRepository = vehicleRepository;
       }
 
@@ -38,16 +40,16 @@ namespace GasMileage.Models
 
       //   R e a d
 
-      public IQueryable<Fillup> GetAllFillups(int vehicleId)
+      public IQueryable<Fillup> GetAllFillups(Guid vehicleId)
       {
-         return _context.Fillups.Where(f => f.VehicleId == vehicleId);
+         return _context.Fillups.Include(f => f.Vehicle).Where(f => f.VehicleId == vehicleId && f.Vehicle.UserId == _userRepository.GetLoggedInUserId());
       }
 
-      public Fillup GetFillupById(int fillupId)
+      public Fillup GetFillupById(Guid fillupId)
       {
          return _context.Fillups
                         .Include(f => f.Vehicle)
-                        .FirstOrDefault(f => f.Id == fillupId);
+                        .FirstOrDefault(f => f.Id == fillupId && f.Vehicle.UserId == _userRepository.GetLoggedInUserId());
       }
 
 
@@ -63,6 +65,7 @@ namespace GasMileage.Models
             fillupToUpdate.Odometer     = f.Odometer;
             fillupToUpdate.TotalCost    = f.TotalCost;
             fillupToUpdate.TripOdometer = f.TripOdometer;
+            fillupToUpdate.ZipCode      = f.ZipCode;
             _context.SaveChanges();
             RecomputeDaysBetweenFillups(f.VehicleId);
          }
@@ -79,15 +82,17 @@ namespace GasMileage.Models
          {
             return false;
          }
+         Guid vehicleId = fillupToDelete.VehicleId;
          _context.Fillups.Remove(fillupToDelete);
          _context.SaveChanges();
+         RecomputeDaysBetweenFillups(vehicleId);
          return true;
       }
 
 
       //   P r i v a t e   M e t h o d s
 
-      private void RecomputeDaysBetweenFillups(int vehicleId)
+      private void RecomputeDaysBetweenFillups(Guid vehicleId)
       {
          if (_vehicleRepository.VehicleExists(vehicleId) == false)
          {

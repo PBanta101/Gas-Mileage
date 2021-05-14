@@ -27,12 +27,13 @@ namespace GasMileage
 
       public void ConfigureServices(IServiceCollection services)
       {
-         string dbConnectionString = System.Environment.GetEnvironmentVariable("MssaCadGasMileageDbConnectionString");
+         services.AddDbContext<AppDbContext>
+            (options => options.UseSqlServer(Configuration.GetConnectionString("LocalDb")));
+
+         // string dbConnectionString = System.Environment.GetEnvironmentVariable("MssaCadGasMileageDbConnectionString"); ;
 
          // services.AddDbContext<AppDbContext>
-         //    (options => options.UseSqlServer(Configuration.GetConnectionString("LocalDb")));
-
-         services.AddDbContext<AppDbContext>(options => options.UseSqlServer(dbConnectionString));
+         //    (options => options.UseSqlServer(dbConnectionString));
 
          services.AddScoped<IEmailRepository, GmailEmailRepository>();
          services.AddScoped<IFillupRepository, EfFillupRepository>();
@@ -82,3 +83,6 @@ namespace GasMileage
       }
    }
 }
+
+// string dbConnectionString = System.Environment.GetEnvironmentVariable("MssaCadGasMileageDbConnectionString");
+// services.AddDbContext<AppDbContext>(options => options.UseSqlServer(dbConnectionString));

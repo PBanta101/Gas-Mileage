@@ -4,72 +4,10 @@
    <legend> Fillup Details </legend>
 
    <table>
-      <tbody>
-         <tr>
-            <th class="pr-1 text-right"> Date: </th>
-            <td class="pl-1"> @Model.Date.ToString("MM-dd-yyyy") </td>
-         </tr>
-
-         <tr>
-            <th class="pr-1 text-right"> Gallons: </th>
-            <td class="pl-1"> @Model.Gallons.ToString("N3") </td>
-         </tr>
-
-         <tr>
-            <th class="pr-1 text-right"> Total Cost: </th>
-            <td class="pl-1"> @Model.TotalCost.ToString("C") </td>
-         </tr>
-
-         <tr>
-            <th class="pr-1 text-right"> Odometer: </th>
-            <td class="pl-1"> @Model.Odometer.ToString("N0") </td>
-         </tr>
-
-         <tr>
-            <th class="pr-1 text-right"> Trip Odometer: </th>
-            <td class="pl-1"> @Model.TripOdometer.ToString("N1") </td>
-         </tr>
-
-         <tr> <td colspan="2"> <hr /> </td> </tr>
-
-         <tr>
-            <th class="pr-1 text-right"> Days Since Last Fillup: </th>
-            <td class="pl-1"> @Model.DaysSinceLastFillup.ToString("N0") </td>
-         </tr>
-
-         <tr>
-            <th class="pr-1 text-right"> Gallons Per Day: </th>
-            <td class="pl-1"> @Model.GallonsPerDay.ToString("N2") </td>
-         </tr>
-
-         <tr>
-            <th class="pr-1 text-right"> Miles Per Day: </th>
-            <td class="pl-1"> @Model.MilesPerDay.ToString("N1") </td>
-         </tr>
-
-         <tr>
-            <th class="pr-1 text-right"> Miles Per Gallon: </th>
-            <td class="pl-1"> @Model.MilesPerGallon.ToString("N1") </td>
-         </tr>
-
-         <tr>
-            <th class="pr-1 text-right"> Price Per Day: </th>
-            <td class="pl-1"> @Model.PricePerDay.ToString("C") </td>
-         </tr>
-
-         <tr>
-            <th class="pr-1 text-right"> Price Per Gallon: </th>
-            <td class="pl-1"> @Model.PricePerGallon.ToString("C3") </td>
-         </tr>
-
-         <tr>
-            <th class="pr-1 text-right"> Price Per Mile: </th>
-            <td class="pl-1"> @Model.PricePerMile.ToString("C3") </td>
-         </tr>
-      </tbody>
+      <partial name="DeleteDetailsPartial" model="@Model" />
 
       <tfoot>
-         <tr> <td colspan="2"> <hr /> </td> </tr>
+         <tr> <td class="pl-2 pr-2" colspan="2"> <hr /> </td> </tr>
 
          <tr>
             <td class="text-center" colspan="2">

@@ -14,20 +14,13 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
 #line 1 "C:\Users\erau\source\repos\GasMileage\Code\GasMileage\Views\_ViewImports.cshtml"
-using GasMileage;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 2 "C:\Users\erau\source\repos\GasMileage\Code\GasMileage\Views\_ViewImports.cshtml"
 using GasMileage.Models;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4f5c5fb008eb536eb357d9b77f4aaca7ff7bd706", @"/Views/Vehicle/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"38baaad51e48fa6ec378213ae0a6623086e8b641", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"698ee4ab109b64fdf6b4b8b4c0bc62adf265559c", @"/Views/_ViewImports.cshtml")]
     public class Views_Vehicle_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IQueryable<Vehicle>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Vehicle", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -60,7 +53,7 @@ using GasMileage.Models;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("\r\n<fieldset class=\"border d-inline-block p-3 shadow\">\r\n   <legend> Vehicles </legend>\r\n\r\n   <table>\r\n      <thead>\r\n         <tr>\r\n            <td class=\"text-center\" colspan=\"2\">\r\n               ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4f5c5fb008eb536eb357d9b77f4aaca7ff7bd7064948", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4f5c5fb008eb536eb357d9b77f4aaca7ff7bd7064769", async() => {
                 WriteLiteral(" Add A Vehicle ");
             }
             );
@@ -112,7 +105,7 @@ using GasMileage.Models;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n               </td>\r\n\r\n               <td class=\"pl-1\">\r\n                  ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4f5c5fb008eb536eb357d9b77f4aaca7ff7bd7067718", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4f5c5fb008eb536eb357d9b77f4aaca7ff7bd7067539", async() => {
                 WriteLiteral("\r\n                     Details\r\n                  ");
             }
             );

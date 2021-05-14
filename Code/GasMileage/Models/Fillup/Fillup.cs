@@ -8,7 +8,7 @@ namespace GasMileage.Models
    [Table("Fillup", Schema = "Mpg")]
    public class Fillup
    {
-      public int Id { get; set; }
+      public Guid Id { get; set; }
 
       [Column(TypeName = "date")]
       [DataType(DataType.Date)]
@@ -17,27 +17,31 @@ namespace GasMileage.Models
       public DateTime Date { get; set; }
 
       [Column(TypeName = "decimal(7, 3)")] // 9,999.999
-      [Range(0.001, 99999.999, ErrorMessage = "Gallons Out Of Range")]
+      [Range(0.001, 99999.999, ErrorMessage = "Gallons Is Out Of Range")]
       [Required(ErrorMessage = "Gallons Is Required")]
       [UIHint("number")]
       public float Gallons { get; set; } // 9,999.999
 
-      [Range(0, 1000000, ErrorMessage = "Odometer Out Of Range")]
+      [Range(0, 1000000, ErrorMessage = "Odometer Is Out Of Range")]
       [Required(ErrorMessage = "Odometer Is Required")]
       [UIHint("number")]
       public int Odometer { get; set; }
 
       [Column(TypeName = "decimal(7, 2)")] // $99,999.99
-      [Range(0.01, 99999.99, ErrorMessage = "Total Cost Out Of Range")]
+      [Range(0.01, 99999.99, ErrorMessage = "Total Cost Is Out Of Range")]
       [Required(ErrorMessage = "Total Cost Is Required")]
       [UIHint("number")]
       public float TotalCost { get; set; } // 99,999.99
 
       [Column(TypeName = "decimal(6, 1)")] // 99,999.9
-      [Range(0.1, 99999.9, ErrorMessage = "Trip Odometer Out Of Range")]
+      [Range(0.1, 99999.9, ErrorMessage = "Trip Odometer Is Out Of Range")]
       [Required(ErrorMessage = "Trip Odometer Is Required")]
       [UIHint("number")]
       public float TripOdometer { get; set; } // 200,000.0
+
+      [Range(1, 99999, ErrorMessage = "Zip Code Is Out Of Range")]
+      [UIHint("number")]
+      public int? ZipCode { get; set; }
 
       // \\ // \\ // \\ // \\ // \\ // \\ // \\ // \\ // \\
 
@@ -76,7 +80,7 @@ namespace GasMileage.Models
 
       // \\ // \\ // \\ // \\ // \\ // \\ // \\ // \\ // \\
 
-      public int VehicleId { get; set; }
+      public Guid VehicleId { get; set; }
 
       public Vehicle Vehicle { get; set; }
    }

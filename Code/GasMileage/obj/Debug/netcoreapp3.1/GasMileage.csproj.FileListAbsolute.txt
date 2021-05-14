@@ -90,3 +90,7 @@ C:\Users\erau\source\repos\GasMileage\Code\GasMileage\obj\Debug\netcoreapp3.1\Ga
 C:\Users\erau\source\repos\GasMileage\Code\GasMileage\obj\Debug\netcoreapp3.1\Razor\Views\User\ResetPassword.cshtml.g.cs
 C:\Users\erau\source\repos\GasMileage\Code\GasMileage\obj\Debug\netcoreapp3.1\Razor\Views\User\RegisterSuccess.cshtml.g.cs
 C:\Users\erau\source\repos\GasMileage\Code\GasMileage\obj\Debug\netcoreapp3.1\Razor\Views\User\ResetPasswordSuccess.cshtml.g.cs
+C:\Users\erau\source\repos\GasMileage\Code\GasMileage\obj\Debug\netcoreapp3.1\Razor\Views\Fillup\AddEditPartial.cshtml.g.cs
+C:\Users\erau\source\repos\GasMileage\Code\GasMileage\obj\Debug\netcoreapp3.1\Razor\Views\Fillup\DeleteDetailsPartial.cshtml.g.cs
+C:\Users\erau\source\repos\GasMileage\Code\GasMileage\obj\Debug\netcoreapp3.1\Razor\Views\Vehicle\AddEditPartial.cshtml.g.cs
+C:\Users\erau\source\repos\GasMileage\Code\GasMileage\obj\Debug\netcoreapp3.1\Razor\Views\Vehicle\DeleteDetailsPartial.cshtml.g.cs

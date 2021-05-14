@@ -8,14 +8,16 @@ namespace GasMileage.Controllers
    {
       //   F i e l d s   &   P r o p e r t i e s
 
-      private IFillupRepository _repository;
+      private readonly IFillupRepository _repository;
+      private readonly IUserRepository   _userRepository;
 
 
       //   C o n s t r u c t o r s
 
-      public FillupController(IFillupRepository repository)
+      public FillupController(IFillupRepository repository, IUserRepository userRepository)
       {
-         _repository = repository;
+         _repository     = repository;
+         _userRepository = userRepository;
       }
 
 
@@ -24,15 +26,20 @@ namespace GasMileage.Controllers
       //   C r e a t e
 
       [HttpGet]
-      public IActionResult Create(int vehicleId)
+      public IActionResult Create(Guid vehicleId)
       {
-         Fillup f = new Fillup { Date = DateTime.Now.Date, VehicleId = vehicleId };
-         return View(f);
+         if (_userRepository.IsUserLoggedIn() == false)
+            return RedirectToAction("Index", "Home");
+
+         return View(new Fillup { Date = DateTime.Now.Date, VehicleId = vehicleId });
       }
 
       [HttpPost]
       public IActionResult Create(Fillup f)
       {
+         if (_userRepository.IsUserLoggedIn() == false)
+            return RedirectToAction("Index", "Home");
+
          if (ModelState.IsValid)
          {
             _repository.Create(f);
@@ -45,13 +52,15 @@ namespace GasMileage.Controllers
 
       //   R e a d
 
-      public IActionResult Details(int id)
+      public IActionResult Details(Guid id)
       {
+         if (_userRepository.IsUserLoggedIn() == false)
+            return RedirectToAction("Index", "Home");
+
          Fillup f = _repository.GetFillupById(id);
          if (f == null)
-         {
             return RedirectToAction("Index", "Vehicle");
-         }
+
          return View(f);
       }
 
@@ -59,8 +68,11 @@ namespace GasMileage.Controllers
       //   U p d a t e
 
       [HttpGet]
-      public IActionResult Edit(int id)
+      public IActionResult Edit(Guid id)
       {
+         if (_userRepository.IsUserLoggedIn() == false)
+            return RedirectToAction("Index", "Home");
+
          Fillup f = _repository.GetFillupById(id);
          return View(f);
       }
@@ -68,6 +80,9 @@ namespace GasMileage.Controllers
       [HttpPost]
       public IActionResult Edit(Fillup f)
       {
+         if (_userRepository.IsUserLoggedIn() == false)
+            return RedirectToAction("Index", "Home");
+
          if (ModelState.IsValid)
          {
             _repository.Update(f);
@@ -81,20 +96,25 @@ namespace GasMileage.Controllers
       //   D e l e t e
 
       [HttpGet]
-      public IActionResult Delete(int id)
+      public IActionResult Delete(Guid id)
       {
+         if (_userRepository.IsUserLoggedIn() == false)
+            return RedirectToAction("Index", "Home");
+
          Fillup f = _repository.GetFillupById(id);
          if (f == null)
-         {
             return RedirectToAction("Index", "Vehicle");
-         }
+
          return View(f);
       }
 
       [HttpPost]
       public IActionResult Delete(Fillup f)
       {
-         int vehicleId = f.VehicleId;
+         if (_userRepository.IsUserLoggedIn() == false)
+            return RedirectToAction("Index", "Home");
+
+         Guid vehicleId = f.VehicleId;
          _repository.Delete(f);
          return RedirectToAction("Details", "Vehicle", new { id = vehicleId });
       }

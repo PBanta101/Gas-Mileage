@@ -4,46 +4,10 @@
    <legend> Edit Vehicle </legend>
 
    <form method="post">
+      <input type="hidden" asp-for="Id" />
+
       <table>
-         @if (ViewData.ModelState.ErrorCount > 0)
-         {
-            <thead>
-               <tr>
-                  <td colspan="2">
-                     <div asp-validation-summary="All" class="text-danger"> </div>
-                  </td>
-               </tr>
-
-               <tr> <td class="pl-2 pr-2" colspan="2"> <hr /> </td> </tr>
-            </thead>
-         }
-
-         <tbody>
-            <tr>
-               <th class="pr-1 text-right"> Year: </th>
-               <td class="pl-1"> <input asp-for="Year" class="rounded" min="1886" required /> </td>
-            </tr>
-
-            <tr>
-               <th class="pr-1 text-right"> Make: </th>
-               <td class="pl-1"> <input asp-for="Make" class="rounded" required /> </td>
-            </tr>
-
-            <tr>
-               <th class="pr-1 text-right"> Model: </th>
-               <td class="pl-1"> <input asp-for="Model" class="rounded" required /> </td>
-            </tr>
-
-            <tr>
-               <th class="pr-1 text-right"> Vin: </th>
-               <td class="pl-1"> <input asp-for="Vin" class="rounded" /> </td>
-            </tr>
-
-            <tr>
-               <th class="pr-1 text-right"> Color: </th>
-               <td class="pl-1"> <input asp-for="Color" class="rounded" /> </td>
-            </tr>
-         </tbody>
+         <partial name="AddEditPartial" model="@Model" />
 
          <tfoot>
             <tr> <td class="pl-2 pr-2" colspan="2"> <hr /> </td> </tr>
@@ -56,6 +20,5 @@
             </tr>
          </tfoot>
       </table>
-
    </form>
 </fieldset>

@@ -11,11 +11,11 @@ namespace GasMileage.Models
    {
       //   F i e l d s   &   P r o p e r t i e s
 
-      private static SHA512 _hash = SHA512.Create();
-      private static Random _random = new Random();
+      private static readonly SHA512 _hash   = SHA512.Create();
+      private static readonly Random _random = new Random();
 
-      private AppDbContext _context;
-      private ISession _session;
+      private readonly AppDbContext _context;
+      private readonly ISession     _session;
 
 
       //   C o n s t r u c t o r s
@@ -31,22 +31,22 @@ namespace GasMileage.Models
 
       //   C r e a t e
 
-      public User Create(User user)
+      public bool Create(User user)
       {
          if (user.UserName == null || user.UserName == ""
              || user.Password == null || user.Password == "")
-            return null;
+            return false;
 
          string username = user.UserName;
          string lcUsername = username.ToLower();
          string encUsername = encrypt(lcUsername);
          User existingUser = _context.Users.FirstOrDefault(u => u.UserName == encUsername);
          if (existingUser != null)
-            return null;
+            return false;
 
          string password = user.Password;
 
-         user.Id = 0;
+         user.Id = new Guid(); ///
          user.UserName = encUsername;
          user.Password = encrypt(lcUsername, password);
          user.TempPassword = null;
@@ -58,7 +58,7 @@ namespace GasMileage.Models
          user.UserName = username;
          user.Password = password;
 
-         return user;
+         return true;
       } // end Create( )
 
 
@@ -74,7 +74,7 @@ namespace GasMileage.Models
          return u;
       } // end GetUserByEmailAddress( )
 
-      public User GetUserById(int id)
+      public User GetUserById(Guid id)
       {
          User u = _context.Users.Find(id);
 
@@ -108,7 +108,7 @@ namespace GasMileage.Models
          if (existingUser.Password != encPassword && existingUser.TempPassword != encPassword)
             return false;
 
-         _session.SetInt32("userid", existingUser.Id);
+         _session.SetString("userid", existingUser.Id.ToString());
          _session.SetString("username", username);
          return true;
       } // end Login( )
@@ -119,16 +119,24 @@ namespace GasMileage.Models
          _session.Remove("username");
       } // end Logout( )
 
-      public int GetLoggedInUserId()
+      public Guid GetLoggedInUserId()
       {
-         int? userId = _session.GetInt32("userid");
-         return userId == null ? -1 : userId.Value;
+         string userId = _session.GetString("userid");
+         return userId == null ? default : new Guid(userId);
       } // end GetLoggedInUserId( )
 
       public string GetLoggedInUserName()
       {
          return _session.GetString("username");
       } // end GetLoggedInUserName( )
+
+      public bool UserExists(string emailAddress)
+      {
+         if (emailAddress == null || emailAddress == "")
+            return false;
+
+         return _context.Users.Any(u => u.UserName == encrypt(emailAddress.ToLower()));
+      } // end UserExists( )
 
 
       //   U p d a t e
@@ -191,7 +199,7 @@ namespace GasMileage.Models
 
       //   D e l e t e
 
-      public bool Delete(int id)
+      public bool Delete(Guid id)
       {
          User userToDelete = GetUserById(id);
          if (userToDelete == null)
@@ -221,7 +229,7 @@ namespace GasMileage.Models
          string result = "";
          for (int i = 0; i < length; i++)
          {
-            result = result + (char)_random.Next(33, 126);
+            result += (char)_random.Next(33, 126);
          }
          return result;
       } // end RandomPassword( )
